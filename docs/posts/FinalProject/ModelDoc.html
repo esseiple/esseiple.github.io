@@ -212,9 +212,7 @@ background-size: cover;
 
 
 
-<section id="results-the-output-of-our-model" class="level1">
-<h1>RESULTS: The Output of Our Model</h1>
-<div id="cell-2" class="cell" data-execution_count="64">
+<div id="cell-1" class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
@@ -230,7 +228,7 @@ background-size: cover;
 </div>
 <section id="reading-in-our-data" class="level3">
 <h3 class="anchored" data-anchor-id="reading-in-our-data">Reading in our Data</h3>
-<div id="cell-4" class="cell" data-execution_count="65">
+<div id="cell-3" class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>conditions_diabetes <span class="op">=</span> pd.read_csv(<span class="st">'conditions_diabetes.csv'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>conditions_pregnancy <span class="op">=</span> pd.read_csv(<span class="st">'conditions_pregnancy.csv'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>conditions_cancer <span class="op">=</span> pd.read_csv(<span class="st">'conditions_cancer.csv'</span>)</span>
@@ -242,13 +240,12 @@ background-size: cover;
 </div>
 <p>Note: All of our datasets are grouped by related diseases (for example diabetes and comorbitidies such as diabetic retinopathy), for the rest of the post, when we say “diabetes” or “pregnancy complications,” we are talking about diabetes and all present comorbidites, or a grouping of pregnancy complications such as pre/ante eclampsia and misscarriage.</p>
 </section>
-</section>
 <section id="diabetes-modeling-analysis" class="level1">
 <h1>Diabetes Modeling &amp; Analysis</h1>
 <section id="prepping-data" class="level3">
 <h3 class="anchored" data-anchor-id="prepping-data">1. Prepping Data</h3>
 <p>In order to prep our data for modelling we label encoded each of the qualitative variables (keeping track so we could decode them again later). We created a function in order to do this easily multiple times.</p>
-<div id="cell-9" class="cell" data-execution_count="66">
+<div id="cell-8" class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>le <span class="op">=</span> LabelEncoder()</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># our data-prepping function for modeling</span></span>
@@ -282,7 +279,7 @@ background-size: cover;
 <span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return split x, y, and all of the code tracking dicts</span></span>
 <span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X_train, y_train, X_test, y_test, race_code, eth_code, gen_code, bp_code, curr_code</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-10" class="cell" data-execution_count="67">
+<div id="cell-9" class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">300</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>X_train, y_train, X_test, y_test, race_code, eth_code, gen_code, bp_code, curr_code <span class="op">=</span> prep_data(conditions_diabetes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -290,7 +287,7 @@ background-size: cover;
 <section id="finding-optimal-model" class="level3">
 <h3 class="anchored" data-anchor-id="finding-optimal-model">2. Finding optimal model</h3>
 <p>Next, we created a function we could reuse that identifies the best performing model on our data from the options random forest, SVC, logistic regression, and decision trees. The best model is what we use to predict the probability that each person has a certain disease (for our purposes, their risk score).</p>
-<div id="cell-13" class="cell" data-execution_count="68">
+<div id="cell-12" class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># our model-finding function</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> train_model(X_train, y_train):</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -352,7 +349,7 @@ background-size: cover;
 <span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"best score overall is: "</span>, max_score, <span class="st">" with model: "</span>, max_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-14" class="cell" data-execution_count="69">
+<div id="cell-13" class="cell" data-execution_count="69">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># run model finding function on our diabetes data</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">500</span>)</span>
@@ -372,13 +369,13 @@ best score overall is:  0.9178790213124979  with model:  DTC</code></pre>
 <section id="create-risk-scores" class="level3">
 <h3 class="anchored" data-anchor-id="create-risk-scores">3. Create Risk Scores</h3>
 <p>Predict probabilities for all our entries using the best model we found.</p>
-<div id="cell-18" class="cell" data-execution_count="70">
+<div id="cell-17" class="cell" data-execution_count="70">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dtc <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>dtc.fit(X_train, y_train)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>pred_prob <span class="op">=</span> dtc.predict_proba(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For ease we created a risk finding function that can be used across factors and disease probabilities.</p>
-<div id="cell-20" class="cell" data-execution_count="71">
+<div id="cell-19" class="cell" data-execution_count="71">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_risk(code, col, probs):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># finds the corresponding subset of our probability data</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    indices <span class="op">=</span> (X_test[col] <span class="op">==</span> code)</span>
@@ -393,7 +390,7 @@ best score overall is:  0.9178790213124979  with model:  DTC</code></pre>
 <p>Next, we find the average risk score for different demographic characteristics: Race, Gender, and Ethnicity.</p>
 <section id="race" class="level4">
 <h4 class="anchored" data-anchor-id="race">Race</h4>
-<div id="cell-23" class="cell" data-execution_count="72">
+<div id="cell-22" class="cell" data-execution_count="72">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>diabetesRaceRisk <span class="op">=</span> []</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># find risk for each race (after finding on their code from the label encoder)</span></span>
@@ -451,7 +448,7 @@ best score overall is:  0.9178790213124979  with model:  DTC</code></pre>
 </section>
 <section id="gender" class="level4">
 <h4 class="anchored" data-anchor-id="gender">Gender</h4>
-<div id="cell-26" class="cell" data-execution_count="73">
+<div id="cell-25" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>diabetesGenderRisk <span class="op">=</span> []</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, gender <span class="kw">in</span> gen_code.items():</span>
@@ -497,7 +494,7 @@ best score overall is:  0.9178790213124979  with model:  DTC</code></pre>
 </section>
 <section id="ethnicity" class="level4">
 <h4 class="anchored" data-anchor-id="ethnicity">Ethnicity</h4>
-<div id="cell-29" class="cell" data-execution_count="74">
+<div id="cell-28" class="cell" data-execution_count="74">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>av_risk_eth <span class="op">=</span> []</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, name <span class="kw">in</span> eth_code.items():</span>
@@ -635,7 +632,7 @@ best score overall is:  0.9178790213124979  with model:  DTC</code></pre>
 <section id="compare-across-wealthier-poorer-towns-of-residencebirthplace" class="level3">
 <h3 class="anchored" data-anchor-id="compare-across-wealthier-poorer-towns-of-residencebirthplace">5. Compare Across Wealthier &amp; Poorer Towns of Residence/Birthplace</h3>
 <p>In order to compare outcomes across towns of varying socioeconomic status, we compiled a list of the richest and poorest towns present in our dataset (using Census data).</p>
-<div id="cell-33" class="cell" data-execution_count="75">
+<div id="cell-32" class="cell" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># richest towns in Mass</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>richTowns <span class="op">=</span> [<span class="st">"Dover"</span>, <span class="st">"Weston"</span>, <span class="st">"Wellesley"</span>, <span class="st">"Lexington"</span>, <span class="st">"Sherborn"</span>, <span class="st">"Cohasset"</span>, <span class="st">"Lincoln"</span>, <span class="st">"Carlisle"</span>, <span class="st">"Hingham"</span>, <span class="st">"Winchester"</span>, </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Medfield"</span>, <span class="st">"Concord"</span>, <span class="st">"Needham"</span>, <span class="st">"Sudbury"</span>, <span class="st">"Hopkinton"</span>, <span class="st">"Boxford"</span>, <span class="st">"Brookline"</span>, <span class="st">"Andover"</span>,  </span>
@@ -651,7 +648,7 @@ best score overall is:  0.9178790213124979  with model:  DTC</code></pre>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Palmer Town"</span>, <span class="st">"Peabody"</span>, <span class="st">"Somerville"</span>, <span class="st">"Lowell"</span>, <span class="st">"Westfield"</span>, <span class="st">"Billerica"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Create a df with all the information for the rich and poor towns</p>
-<div id="cell-35" class="cell" data-execution_count="76">
+<div id="cell-34" class="cell" data-execution_count="76">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_town_info_row(town, bp_code_swapped, townCounts_df, code_name):</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    code <span class="op">=</span> bp_code_swapped[town]</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -666,7 +663,7 @@ best score overall is:  0.9178790213124979  with model:  DTC</code></pre>
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_row_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-36" class="cell" data-execution_count="77">
+<div id="cell-35" class="cell" data-execution_count="77">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_town_info_all(counts, code_name):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    townCounts_df <span class="op">=</span> pd.merge(X_test, counts, on<span class="op">=</span>code_name)</span>
@@ -692,7 +689,7 @@ best score overall is:  0.9178790213124979  with model:  DTC</code></pre>
 <span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>town_info_rich, town_info_poor <span class="op">=</span> find_town_info_all(birthplace_counts, <span class="st">'birthplace'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We proceed with the following code to get the list of towns that sum up to 65 people from the richest towns, and 65 people from the poorest towns.</p>
-<div id="cell-38" class="cell" data-execution_count="78">
+<div id="cell-37" class="cell" data-execution_count="78">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_towns_by_sum_pop(town_info, code_name):</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    townsUsed <span class="op">=</span> <span class="bu">set</span>()</span>
@@ -716,7 +713,7 @@ best score overall is:  0.9178790213124979  with model:  DTC</code></pre>
 </section>
 <section id="birthplace" class="level3">
 <h3 class="anchored" data-anchor-id="birthplace">Birthplace</h3>
-<div id="cell-40" class="cell" data-execution_count="79">
+<div id="cell-39" class="cell" data-execution_count="79">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_av_prob_bp(townsUsed, code_name, bp_code):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    town_codes <span class="op">=</span> []</span>
@@ -732,7 +729,7 @@ best score overall is:  0.9178790213124979  with model:  DTC</code></pre>
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> av_prob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-41" class="cell" data-execution_count="80">
+<div id="cell-40" class="cell" data-execution_count="80">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>av_rich_prob <span class="op">=</span> get_av_prob_bp(richTownsUsed, <span class="st">'birthplace'</span>, bp_code)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>av_poor_prob <span class="op">=</span> get_av_prob_bp(poorTownsUsed, <span class="st">'birthplace'</span>, bp_code)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -746,14 +743,14 @@ best score overall is:  0.9178790213124979  with model:  DTC</code></pre>
 <section id="current-town-of-residence" class="level3">
 <h3 class="anchored" data-anchor-id="current-town-of-residence">Current Town of Residence</h3>
 <p>Create a dataframe with the information for rich and poor towns. Then get the list of towns that sum up to 65 people from the richest towns, and 65 people from the poorest towns.</p>
-<div id="cell-45" class="cell" data-execution_count="81">
+<div id="cell-44" class="cell" data-execution_count="81">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>curr_counts <span class="op">=</span> X_test.groupby(<span class="st">'curr_town'</span>).size().reset_index(name<span class="op">=</span><span class="st">'count'</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>town_info_rich, town_info_poor <span class="op">=</span> find_town_info_all(curr_counts, <span class="st">'curr_town'</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>richTownsUsed, richPeopleCount <span class="op">=</span> get_towns_by_sum_pop(town_info_rich, <span class="st">'curr_town'</span>)</span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>poorTownsUsed, poorPeopleCount <span class="op">=</span> get_towns_by_sum_pop(town_info_poor, <span class="st">'curr_town'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-46" class="cell" data-execution_count="82">
+<div id="cell-45" class="cell" data-execution_count="82">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>av_rich_prob <span class="op">=</span> get_av_prob_bp(richTownsUsed, <span class="st">'curr_town'</span>, bp_code)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>av_poor_prob <span class="op">=</span> get_av_prob_bp(poorTownsUsed, <span class="st">'curr_town'</span>, bp_code)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#HERE</span></span>
@@ -770,11 +767,11 @@ best score overall is:  0.9178790213124979  with model:  DTC</code></pre>
 <h1>Pregnancy Analysis</h1>
 <p>We repeated the same exact process as above for each of our condition subsets.</p>
 <p>Finding the best model:</p>
-<div id="cell-51" class="cell" data-execution_count="83">
+<div id="cell-50" class="cell" data-execution_count="83">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">567</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>X_train, y_train, X_test, y_test, race_code, eth_code, gen_code, bp_code, curr_code <span class="op">=</span> prep_data(conditions_pregnancy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-52" class="cell" data-execution_count="84">
+<div id="cell-51" class="cell" data-execution_count="84">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">567</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>train_model(X_train, y_train) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -790,7 +787,7 @@ best score overall is:  0.9632185172957705  with model:  DTC</code></pre>
 <section id="compute-average-risk-scores" class="level3">
 <h3 class="anchored" data-anchor-id="compute-average-risk-scores">Compute Average Risk scores</h3>
 <p>Predict probabilities for all our entries using the best model we found</p>
-<div id="cell-55" class="cell" data-execution_count="85">
+<div id="cell-54" class="cell" data-execution_count="85">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>DTC <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>DTC.fit(X_train, y_train)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>pred_prob <span class="op">=</span> DTC.predict_proba(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -798,7 +795,7 @@ best score overall is:  0.9632185172957705  with model:  DTC</code></pre>
 </section>
 <section id="race-1" class="level3">
 <h3 class="anchored" data-anchor-id="race-1">Race</h3>
-<div id="cell-57" class="cell" data-execution_count="86">
+<div id="cell-56" class="cell" data-execution_count="86">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>pregRaceRisk <span class="op">=</span> []</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, race <span class="kw">in</span> race_code.items():</span>
@@ -854,7 +851,7 @@ best score overall is:  0.9632185172957705  with model:  DTC</code></pre>
 </section>
 <section id="gender-1" class="level3">
 <h3 class="anchored" data-anchor-id="gender-1">Gender</h3>
-<div id="cell-60" class="cell" data-execution_count="87">
+<div id="cell-59" class="cell" data-execution_count="87">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>pregGenderRisk <span class="op">=</span> []</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, gender <span class="kw">in</span> gen_code.items():</span>
@@ -900,7 +897,7 @@ best score overall is:  0.9632185172957705  with model:  DTC</code></pre>
 </section>
 <section id="ethnicity-1" class="level3">
 <h3 class="anchored" data-anchor-id="ethnicity-1">Ethnicity</h3>
-<div id="cell-63" class="cell" data-execution_count="88">
+<div id="cell-62" class="cell" data-execution_count="88">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>av_risk_eth <span class="op">=</span> []</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, name <span class="kw">in</span> eth_code.items():</span>
@@ -911,7 +908,7 @@ best score overall is:  0.9632185172957705  with model:  DTC</code></pre>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>av_risk_eth_df <span class="op">=</span> pd.DataFrame(av_risk_eth)</span>
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>av_risk_eth_df <span class="op">=</span> av_risk_eth_df.sort_values(by<span class="op">=</span><span class="st">'risk'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-64" class="cell" data-execution_count="89">
+<div id="cell-63" class="cell" data-execution_count="89">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>av_risk_eth_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="89">
 <div>
@@ -1038,13 +1035,13 @@ best score overall is:  0.9632185172957705  with model:  DTC</code></pre>
 </section>
 <section id="birthplace-1" class="level3">
 <h3 class="anchored" data-anchor-id="birthplace-1">Birthplace</h3>
-<div id="cell-67" class="cell" data-execution_count="90">
+<div id="cell-66" class="cell" data-execution_count="90">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>birthplace_counts <span class="op">=</span> X_test.groupby(<span class="st">'birthplace'</span>).size().reset_index(name<span class="op">=</span><span class="st">'count'</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>town_info_rich, town_info_poor <span class="op">=</span> find_town_info_all(birthplace_counts, <span class="st">'birthplace'</span>)</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>richTownsUsed, richPeopleCount <span class="op">=</span> get_towns_by_sum_pop(town_info_rich, <span class="st">'birthplace'</span>)</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>poorTownsUsed, poorPeopleCount <span class="op">=</span> get_towns_by_sum_pop(town_info_poor, <span class="st">'birthplace'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-68" class="cell" data-execution_count="91">
+<div id="cell-67" class="cell" data-execution_count="91">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">234</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>av_rich_prob <span class="op">=</span> get_av_prob_bp(richTownsUsed, <span class="st">'birthplace'</span>, bp_code)</span>
@@ -1058,13 +1055,13 @@ best score overall is:  0.9632185172957705  with model:  DTC</code></pre>
 </section>
 <section id="current-town-of-residence-1" class="level3">
 <h3 class="anchored" data-anchor-id="current-town-of-residence-1">Current Town of Residence</h3>
-<div id="cell-70" class="cell" data-execution_count="92">
+<div id="cell-69" class="cell" data-execution_count="92">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>curr_counts <span class="op">=</span> X_test.groupby(<span class="st">'curr_town'</span>).size().reset_index(name<span class="op">=</span><span class="st">'count'</span>)</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>town_info_rich, town_info_poor <span class="op">=</span> find_town_info_all(curr_counts, <span class="st">'curr_town'</span>)</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>richTownsUsed, richPeopleCount <span class="op">=</span> get_towns_by_sum_pop(town_info_rich, <span class="st">'curr_town'</span>)</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>poorTownsUsed, poorPeopleCount <span class="op">=</span> get_towns_by_sum_pop(town_info_poor, <span class="st">'curr_town'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-71" class="cell" data-execution_count="93">
+<div id="cell-70" class="cell" data-execution_count="93">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">234</span>)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>av_rich_prob <span class="op">=</span> get_av_prob_bp(richTownsUsed, <span class="st">'curr_town'</span>, bp_code)</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>av_poor_prob <span class="op">=</span> get_av_prob_bp(poorTownsUsed, <span class="st">'curr_town'</span>, bp_code)</span>
@@ -1079,7 +1076,7 @@ best score overall is:  0.9632185172957705  with model:  DTC</code></pre>
 </section>
 <section id="cancer-analysis" class="level1">
 <h1>Cancer Analysis</h1>
-<div id="cell-74" class="cell" data-execution_count="94">
+<div id="cell-73" class="cell" data-execution_count="94">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">2</span>)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>X_train, y_train, X_test, y_test, race_code, eth_code, gen_code, bp_code, curr_code <span class="op">=</span> prep_data(conditions_cancer)</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1099,14 +1096,14 @@ best score overall is:  0.9546641722607386  with model:  DTC</code></pre>
 </div>
 </div>
 <p>Once again we find that the model with the best score is DTC, The Decision Tree Classifier, with about 98% accuracy.</p>
-<div id="cell-76" class="cell" data-execution_count="95">
+<div id="cell-75" class="cell" data-execution_count="95">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>DTC <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>DTC.fit(X_train, y_train)</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>pred_prob <span class="op">=</span> DTC.predict_proba(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="race-2" class="level3">
 <h3 class="anchored" data-anchor-id="race-2">Race</h3>
-<div id="cell-78" class="cell" data-execution_count="96">
+<div id="cell-77" class="cell" data-execution_count="96">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>cancerRaceRisk <span class="op">=</span> []</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, race <span class="kw">in</span> race_code.items():</span>
@@ -1162,7 +1159,7 @@ best score overall is:  0.9546641722607386  with model:  DTC</code></pre>
 </section>
 <section id="gender-2" class="level3">
 <h3 class="anchored" data-anchor-id="gender-2">Gender</h3>
-<div id="cell-81" class="cell" data-execution_count="97">
+<div id="cell-80" class="cell" data-execution_count="97">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>cancerGenderRisk <span class="op">=</span> []</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, gender <span class="kw">in</span> gen_code.items():</span>
@@ -1208,7 +1205,7 @@ best score overall is:  0.9546641722607386  with model:  DTC</code></pre>
 </section>
 <section id="ethnicity-2" class="level3">
 <h3 class="anchored" data-anchor-id="ethnicity-2">Ethnicity</h3>
-<div id="cell-84" class="cell" data-execution_count="98">
+<div id="cell-83" class="cell" data-execution_count="98">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>cancerEthRisk <span class="op">=</span> []</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, name <span class="kw">in</span> eth_code.items():</span>
@@ -1345,7 +1342,7 @@ best score overall is:  0.9546641722607386  with model:  DTC</code></pre>
 </section>
 <section id="birthplace-2" class="level3">
 <h3 class="anchored" data-anchor-id="birthplace-2">Birthplace</h3>
-<div id="cell-87" class="cell" data-execution_count="99">
+<div id="cell-86" class="cell" data-execution_count="99">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>av_rich_prob <span class="op">=</span> get_av_prob_bp(richTownsUsed, <span class="st">'birthplace'</span>, bp_code)</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>av_poor_prob <span class="op">=</span> get_av_prob_bp(poorTownsUsed, <span class="st">'birthplace'</span>, bp_code)</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1357,7 +1354,7 @@ best score overall is:  0.9546641722607386  with model:  DTC</code></pre>
 </section>
 <section id="current-town-of-residence-2" class="level3">
 <h3 class="anchored" data-anchor-id="current-town-of-residence-2">Current Town of Residence</h3>
-<div id="cell-89" class="cell" data-execution_count="100">
+<div id="cell-88" class="cell" data-execution_count="100">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>av_rich_prob <span class="op">=</span> get_av_prob_bp(richTownsUsed, <span class="st">'curr_town'</span>, bp_code)</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>av_poor_prob <span class="op">=</span> get_av_prob_bp(poorTownsUsed, <span class="st">'curr_town'</span>, bp_code)</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1371,7 +1368,7 @@ best score overall is:  0.9546641722607386  with model:  DTC</code></pre>
 </section>
 <section id="heart-analysis" class="level1">
 <h1>Heart Analysis</h1>
-<div id="cell-92" class="cell" data-execution_count="101">
+<div id="cell-91" class="cell" data-execution_count="101">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">210</span>)</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>X_train, y_train, X_test, y_test, race_code, eth_code, gen_code, bp_code, curr_code <span class="op">=</span> prep_data(conditions_heart)</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1411,7 +1408,7 @@ best score overall is:  0.8999156303877335  with model:  RFC</code></pre>
 <section id="compute-average-risk-scores-1" class="level3">
 <h3 class="anchored" data-anchor-id="compute-average-risk-scores-1">Compute Average Risk scores</h3>
 <p>We found that the best model to predict probabilities for all our entries iin this case would be RFC.</p>
-<div id="cell-94" class="cell" data-execution_count="115">
+<div id="cell-93" class="cell" data-execution_count="115">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>RFC <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">0</span>, max_depth<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>RFC.fit(X_train, y_train)</span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1423,7 +1420,7 @@ best score overall is:  0.8999156303877335  with model:  RFC</code></pre>
 </section>
 <section id="race-3" class="level3">
 <h3 class="anchored" data-anchor-id="race-3">Race</h3>
-<div id="cell-97" class="cell" data-execution_count="116">
+<div id="cell-96" class="cell" data-execution_count="116">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>heartRaceRisk <span class="op">=</span> []</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, race <span class="kw">in</span> race_code.items():</span>
@@ -1479,7 +1476,7 @@ best score overall is:  0.8999156303877335  with model:  RFC</code></pre>
 </section>
 <section id="gender-3" class="level3">
 <h3 class="anchored" data-anchor-id="gender-3">Gender</h3>
-<div id="cell-100" class="cell" data-execution_count="117">
+<div id="cell-99" class="cell" data-execution_count="117">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>heartGenderRisk <span class="op">=</span> []</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, gender <span class="kw">in</span> gen_code.items():</span>
@@ -1525,7 +1522,7 @@ best score overall is:  0.8999156303877335  with model:  RFC</code></pre>
 </section>
 <section id="ethnicity-3" class="level3">
 <h3 class="anchored" data-anchor-id="ethnicity-3">Ethnicity</h3>
-<div id="cell-103" class="cell" data-execution_count="118">
+<div id="cell-102" class="cell" data-execution_count="118">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>heartEthRisk <span class="op">=</span> []</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, name <span class="kw">in</span> eth_code.items():</span>
@@ -1662,7 +1659,7 @@ best score overall is:  0.8999156303877335  with model:  RFC</code></pre>
 </section>
 <section id="birthplace-3" class="level3">
 <h3 class="anchored" data-anchor-id="birthplace-3">Birthplace</h3>
-<div id="cell-106" class="cell" data-execution_count="106">
+<div id="cell-105" class="cell" data-execution_count="106">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>av_rich_prob <span class="op">=</span> get_av_prob_bp(richTownsUsed, <span class="st">'birthplace'</span>, bp_code)</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>av_poor_prob <span class="op">=</span> get_av_prob_bp(poorTownsUsed, <span class="st">'birthplace'</span>, bp_code)</span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1674,7 +1671,7 @@ best score overall is:  0.8999156303877335  with model:  RFC</code></pre>
 </section>
 <section id="current-town-of-residence-3" class="level3">
 <h3 class="anchored" data-anchor-id="current-town-of-residence-3">Current Town of Residence</h3>
-<div id="cell-108" class="cell" data-execution_count="107">
+<div id="cell-107" class="cell" data-execution_count="107">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>av_rich_prob <span class="op">=</span> get_av_prob_bp(richTownsUsed, <span class="st">'curr_town'</span>, bp_code)</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>av_poor_prob <span class="op">=</span> get_av_prob_bp(poorTownsUsed, <span class="st">'curr_town'</span>, bp_code)</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1688,7 +1685,7 @@ best score overall is:  0.8999156303877335  with model:  RFC</code></pre>
 </section>
 <section id="lungs-analysis" class="level1">
 <h1>Lungs Analysis</h1>
-<div id="cell-111" class="cell" data-execution_count="108">
+<div id="cell-110" class="cell" data-execution_count="108">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">400</span>)</span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>X_train, y_train, X_test, y_test, race_code, eth_code, gen_code, bp_code, curr_code <span class="op">=</span> prep_data(conditions_lungs)</span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1709,7 +1706,7 @@ best score overall is:  0.6210850665786289  with model:  RFC</code></pre>
 <section id="compute-average-risk-scores-2" class="level3">
 <h3 class="anchored" data-anchor-id="compute-average-risk-scores-2">Compute Average Risk scores</h3>
 <p>We found that the best model to predict probabilities for all our entries iin this case would be RFC.</p>
-<div id="cell-113" class="cell" data-execution_count="124">
+<div id="cell-112" class="cell" data-execution_count="124">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>RFC <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">0</span>, max_depth<span class="op">=</span><span class="dv">4</span>)</span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>RFC.fit(X_train, y_train)</span>
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1721,7 +1718,7 @@ best score overall is:  0.6210850665786289  with model:  RFC</code></pre>
 </section>
 <section id="race-4" class="level3">
 <h3 class="anchored" data-anchor-id="race-4">Race</h3>
-<div id="cell-116" class="cell" data-execution_count="125">
+<div id="cell-115" class="cell" data-execution_count="125">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>lungsRaceRisk <span class="op">=</span> []</span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, race <span class="kw">in</span> race_code.items():</span>
@@ -1776,7 +1773,7 @@ best score overall is:  0.6210850665786289  with model:  RFC</code></pre>
 </section>
 <section id="gender-4" class="level3">
 <h3 class="anchored" data-anchor-id="gender-4">Gender</h3>
-<div id="cell-118" class="cell" data-execution_count="122">
+<div id="cell-117" class="cell" data-execution_count="122">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>lungsGenderRisk <span class="op">=</span> []</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, gender <span class="kw">in</span> gen_code.items():</span>
@@ -1821,7 +1818,7 @@ best score overall is:  0.6210850665786289  with model:  RFC</code></pre>
 </section>
 <section id="ethnicity-4" class="level3">
 <h3 class="anchored" data-anchor-id="ethnicity-4">Ethnicity</h3>
-<div id="cell-120" class="cell" data-execution_count="126">
+<div id="cell-119" class="cell" data-execution_count="126">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>lungsEthRisk <span class="op">=</span> []</span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, name <span class="kw">in</span> eth_code.items():</span>
@@ -1957,7 +1954,7 @@ best score overall is:  0.6210850665786289  with model:  RFC</code></pre>
 </section>
 <section id="birthplace-4" class="level3">
 <h3 class="anchored" data-anchor-id="birthplace-4">Birthplace</h3>
-<div id="cell-122" class="cell" data-execution_count="127">
+<div id="cell-121" class="cell" data-execution_count="127">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>av_rich_prob <span class="op">=</span> get_av_prob_bp(richTownsUsed, <span class="st">'birthplace'</span>, bp_code)</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>av_poor_prob <span class="op">=</span> get_av_prob_bp(poorTownsUsed, <span class="st">'birthplace'</span>, bp_code)</span>
 <span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1969,7 +1966,7 @@ best score overall is:  0.6210850665786289  with model:  RFC</code></pre>
 </section>
 <section id="current-town-of-residence-4" class="level3">
 <h3 class="anchored" data-anchor-id="current-town-of-residence-4">Current Town of Residence</h3>
-<div id="cell-124" class="cell" data-execution_count="128">
+<div id="cell-123" class="cell" data-execution_count="128">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>av_rich_prob <span class="op">=</span> get_av_prob_bp(richTownsUsed, <span class="st">'curr_town'</span>, bp_code)</span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>av_poor_prob <span class="op">=</span> get_av_prob_bp(poorTownsUsed, <span class="st">'curr_town'</span>, bp_code)</span>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>

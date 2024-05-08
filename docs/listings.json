@@ -2,8 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/newtons/newtonblogpost.html",
       "/posts/FinalProject/PostHomePage.html",
+      "/posts/newtons/newtonblogpost.html",
       "/posts/logistic/LogisticBlogPost.html",
       "/posts/perceptron/PerceptronBlogPost.html",
       "/posts/hospital/ReplicationBiasPost.html",
