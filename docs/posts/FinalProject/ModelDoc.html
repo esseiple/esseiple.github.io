@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Sophie Seiple, Julia Joy, Lindsey Schweitzer">
+<meta name="dcterms.date" content="2024-01-01">
+<meta name="description" content="Process of model creation.">
 
-<title>My Awesome CSCI 0451 Blog - RESULTS: The Output of Our Model</title>
+<title>My Awesome CSCI 0451 Blog - Final Project Results, Model Creation Document</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -168,14 +171,31 @@ background-size: cover;
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">RESULTS: The Output of Our Model</h1>
-                      </div>
+      <h1 class="title">Final Project Results, Model Creation Document</h1>
+                  <div>
+        <div class="description">
+          Process of model creation.
+        </div>
+      </div>
+                </div>
   </div>
     
   
   <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Sophie Seiple, Julia Joy, Lindsey Schweitzer </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 1, 2024</p>
+      </div>
+    </div>
     
       
     </div>
@@ -192,6 +212,8 @@ background-size: cover;
 
 
 
+<section id="results-the-output-of-our-model" class="level1">
+<h1>RESULTS: The Output of Our Model</h1>
 <div id="cell-2" class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -219,6 +241,7 @@ background-size: cover;
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>patients <span class="op">=</span> pd.read_csv(<span class="st">'patient_clean.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note: All of our datasets are grouped by related diseases (for example diabetes and comorbitidies such as diabetic retinopathy), for the rest of the post, when we say “diabetes” or “pregnancy complications,” we are talking about diabetes and all present comorbidites, or a grouping of pregnancy complications such as pre/ante eclampsia and misscarriage.</p>
+</section>
 </section>
 <section id="diabetes-modeling-analysis" class="level1">
 <h1>Diabetes Modeling &amp; Analysis</h1>

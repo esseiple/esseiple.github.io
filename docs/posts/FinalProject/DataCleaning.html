@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Sophie Seiple, Julia Joy, Lindsey Schweitzer">
+<meta name="dcterms.date" content="2024-01-01">
+<meta name="description" content="Process of data cleaning.">
 
-<title>My Awesome CSCI 0451 Blog - Read in data</title>
+<title>My Awesome CSCI 0451 Blog - Final Project Methods, Data Cleaning Document</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -165,14 +168,31 @@ background-size: cover;
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Read in data</h1>
-                      </div>
+      <h1 class="title">Final Project Methods, Data Cleaning Document</h1>
+                  <div>
+        <div class="description">
+          Process of data cleaning.
+        </div>
+      </div>
+                </div>
   </div>
     
   
   <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Sophie Seiple, Julia Joy, Lindsey Schweitzer </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 1, 2024</p>
+      </div>
+    </div>
     
       
     </div>
@@ -193,6 +213,8 @@ background-size: cover;
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<section id="read-in-data" class="level2">
+<h2 class="anchored" data-anchor-id="read-in-data">Read in data</h2>
 <div id="cell-3" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>allergies <span class="op">=</span> pd.read_csv(<span class="st">'allergies.csv'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>careplans <span class="op">=</span> pd.read_csv(<span class="st">'careplans.csv'</span>)</span>
@@ -210,6 +232,7 @@ background-size: cover;
 <pre><code>27</code></pre>
 </div>
 </div>
+</section>
 <section id="clean-up-dataframes-have-one-row-per-patient" class="level2">
 <h2 class="anchored" data-anchor-id="clean-up-dataframes-have-one-row-per-patient">Clean up dataframes: have one row per patient</h2>
 <div id="cell-6" class="cell" data-execution_count="90">
