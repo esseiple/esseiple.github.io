@@ -20,7 +20,11 @@ format:
     theme: cosmo
     css: styles.css
 
-
+render:
+  exclude:
+    - "AnalysisDoc.ipynb"
+    - "DataCleaning.ipynb"
+    - "ModelDoc.ipynb"
 
 
 

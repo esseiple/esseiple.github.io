@@ -1,7 +1,9 @@
 ---
 title: "My Awesome CSCI 0451 Blog"
 listing:
-  contents: posts
+  contents:
+    - posts
+    - !hidden_pages
   sort: "date desc"
   type: default
   categories: true
@@ -10,4 +12,7 @@ listing:
 page-layout: full
 ---
 
+- [Link to Analysis Document](hidden_pages/AnalysisDoc.ipynb)
+- [Link to Data Cleaning Document](hidden_pages/DataCleaning.ipynb)
+- [Link to Model Document](hidden_pages/ModelDoc.ipynb)
  
