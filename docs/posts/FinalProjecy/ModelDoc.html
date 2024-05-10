@@ -1155,7 +1155,7 @@ best score overall is:  0.9546641722607386  with model:  DTC</code></pre>
 </div>
 </div>
 </div>
-<p>We find across the board cancer rates are somewhat even, but that at the extremes white patients have almost a 50% risk of being classified with cancer,and Asian patients have around a 30% risk.</p>
+<p>We find across the board cancer rates are somewhat even, but that at the extremes white patients have a 52% risk of being classified with cancer,and Asian patients have around a 34% risk.</p>
 </section>
 <section id="gender-2" class="level3">
 <h3 class="anchored" data-anchor-id="gender-2">Gender</h3>
@@ -1363,7 +1363,7 @@ best score overall is:  0.9546641722607386  with model:  DTC</code></pre>
 <pre><code>av_rich_prob:  0.03621368085712754 av_poor_prob:  0.05164958111475114</code></pre>
 </div>
 </div>
-<p>We note that for both birthplace towns, people in rich towns are more likely to get diagnosed with cancer as opposed to people from poorer towns. For current town of residence, the opposite is true.</p>
+<p>We note that for birthplace, people in rich towns are more likely to get diagnosed with cancer as opposed to people from poorer towns. For current town of residence, the opposite is true.</p>
 </section>
 </section>
 <section id="heart-analysis" class="level1">
@@ -1770,10 +1770,11 @@ best score overall is:  0.6210850665786289  with model:  RFC</code></pre>
 </div>
 </div>
 </div>
+<p>We find very little variation for risk rates for lung issues for race.</p>
 </section>
 <section id="gender-4" class="level3">
 <h3 class="anchored" data-anchor-id="gender-4">Gender</h3>
-<div id="cell-117" class="cell" data-execution_count="122">
+<div id="cell-118" class="cell" data-execution_count="122">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>lungsGenderRisk <span class="op">=</span> []</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, gender <span class="kw">in</span> gen_code.items():</span>
@@ -1815,10 +1816,11 @@ best score overall is:  0.6210850665786289  with model:  RFC</code></pre>
 </div>
 </div>
 </div>
+<p>Again, there are pretty even rates for gender and risk of having lung complications.</p>
 </section>
 <section id="ethnicity-4" class="level3">
 <h3 class="anchored" data-anchor-id="ethnicity-4">Ethnicity</h3>
-<div id="cell-119" class="cell" data-execution_count="126">
+<div id="cell-121" class="cell" data-execution_count="126">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>lungsEthRisk <span class="op">=</span> []</span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code, name <span class="kw">in</span> eth_code.items():</span>
@@ -1951,10 +1953,11 @@ best score overall is:  0.6210850665786289  with model:  RFC</code></pre>
 </div>
 </div>
 </div>
+<p>This analysis follows the trend of generally even probabilities throughout, in the most extreme cases with polish people having 58% risk and chinese people having 45%.</p>
 </section>
 <section id="birthplace-4" class="level3">
 <h3 class="anchored" data-anchor-id="birthplace-4">Birthplace</h3>
-<div id="cell-121" class="cell" data-execution_count="127">
+<div id="cell-124" class="cell" data-execution_count="127">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>av_rich_prob <span class="op">=</span> get_av_prob_bp(richTownsUsed, <span class="st">'birthplace'</span>, bp_code)</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>av_poor_prob <span class="op">=</span> get_av_prob_bp(poorTownsUsed, <span class="st">'birthplace'</span>, bp_code)</span>
 <span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1966,7 +1969,7 @@ best score overall is:  0.6210850665786289  with model:  RFC</code></pre>
 </section>
 <section id="current-town-of-residence-4" class="level3">
 <h3 class="anchored" data-anchor-id="current-town-of-residence-4">Current Town of Residence</h3>
-<div id="cell-123" class="cell" data-execution_count="128">
+<div id="cell-126" class="cell" data-execution_count="128">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>av_rich_prob <span class="op">=</span> get_av_prob_bp(richTownsUsed, <span class="st">'curr_town'</span>, bp_code)</span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>av_poor_prob <span class="op">=</span> get_av_prob_bp(poorTownsUsed, <span class="st">'curr_town'</span>, bp_code)</span>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1975,7 +1978,7 @@ best score overall is:  0.6210850665786289  with model:  RFC</code></pre>
 <pre><code>av_rich_prob:  0.5039833131472166 av_poor_prob:  0.5124758651408807</code></pre>
 </div>
 </div>
-<p>The results for the risk score for patients of different race, gender, ethnicity, birthplace town, and current town of residence are curious as every risk score hovers around a 0.5.</p>
+<p>The results for the risk score for patients of different race, gender, ethnicity, birthplace town, and current town of residence are curious as every risk score hovers around a 0.5 and generally even throughout the different demographics. This points to the conclusion that we are maybe investigating too large amount of conditions under lung ailments.</p>
 
 
 </section>

@@ -528,10 +528,11 @@ background-size: cover;
 </div>
 </div>
 </div>
+<p>It seems as though black patients are the most likely to get acute bronchitis while asian patients are most likely to get chronic sinusitis. This is important as analyzing these conditions together mike give us more mixed results in total.</p>
 </section>
 <section id="pulmonary-diseases-by-ethnicity" class="level3">
 <h3 class="anchored" data-anchor-id="pulmonary-diseases-by-ethnicity">PULMONARY DISEASES BY ETHNICITY</h3>
-<div id="cell-22" class="cell" data-execution_count="79">
+<div id="cell-23" class="cell" data-execution_count="79">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the columns ending with '_CONDITIONS'</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>condition_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> lungs.columns <span class="cf">if</span> col.endswith(<span class="st">'_CONDITIONS'</span>)]</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -560,11 +561,12 @@ background-size: cover;
 </div>
 </div>
 </div>
+<p>Again, these vary by different diseases. However, we can see that Dominican and Mexican patients are most likely to be diagnosed with Acute bronchitis while Asian Indian patients are far more likely to get Chronic sinusitis.</p>
 </section>
 <section id="pulmonary-diseases-by-birthplace" class="level3">
 <h3 class="anchored" data-anchor-id="pulmonary-diseases-by-birthplace">PULMONARY DISEASES BY BIRTHPLACE</h3>
 <p>Creating a dataframe of populations of all the towns present in our data (all in Massachusetts), in order to calculate adjusted prevalance.</p>
-<div id="cell-25" class="cell" data-execution_count="5">
+<div id="cell-27" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>populations <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>unique_birthplaces <span class="op">=</span> lungs[<span class="st">'birthplace'</span>].unique()</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>populations[<span class="st">'birthplace'</span>] <span class="op">=</span> unique_birthplaces</span>
@@ -590,14 +592,14 @@ background-size: cover;
 <span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>                       <span class="dv">9811</span>, <span class="dv">27400</span>, <span class="dv">4871</span>, <span class="dv">24296</span>, <span class="dv">12133</span>, <span class="dv">6346</span>, <span class="dv">31635</span>, <span class="dv">11688</span>, <span class="dv">1245</span>, <span class="dv">5284</span>, <span class="dv">5966</span>, <span class="dv">1458</span>, <span class="dv">780</span>, <span class="dv">27135</span>, <span class="dv">316</span>,</span>
 <span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>                       <span class="dv">5429</span>, <span class="dv">17765</span>, <span class="dv">12629</span>, <span class="dv">3390</span>, <span class="dv">6952</span>, <span class="dv">7144</span>, <span class="dv">2180</span>, <span class="dv">7649</span>, <span class="dv">4907</span>, <span class="dv">5139</span>, <span class="dv">4852</span>, <span class="dv">5125</span>, <span class="dv">5135</span>, <span class="dv">2901</span>, <span class="dv">5398</span>, <span class="dv">4519</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-26" class="cell" data-execution_count="6">
+<div id="cell-28" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>condition_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> lungs.columns <span class="cf">if</span> col.endswith(<span class="st">'_CONDITIONS'</span>)]</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>conditions_summed <span class="op">=</span> lungs.groupby(<span class="st">'birthplace'</span>)[condition_columns].<span class="bu">sum</span>().reset_index()</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>prevdatalungs <span class="op">=</span> pd.merge(conditions_summed, populations, on<span class="op">=</span><span class="st">"birthplace"</span>)</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> condition_column <span class="kw">in</span> condition_columns:</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    prevdatalungs[<span class="ss">f'prevalence_</span><span class="sc">{</span>condition_column<span class="sc">}</span><span class="ss">'</span>] <span class="op">=</span> prevdatalungs[condition_column] <span class="op">/</span> prevdatalungs[<span class="st">'pop'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-27" class="cell" data-execution_count="7">
+<div id="cell-29" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> condition_column <span class="kw">in</span> condition_columns:</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter out birthplaces where prevalence is not zero</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    filtered_data <span class="op">=</span> prevdatalungs[prevdatalungs[<span class="ss">f'prevalence_</span><span class="sc">{</span>condition_column<span class="sc">}</span><span class="ss">'</span>] <span class="op">!=</span> <span class="dv">0</span>]</span>
@@ -689,14 +691,14 @@ background-size: cover;
 </div>
 </div>
 </div>
-<p>In many of these towns, it’s worth nothing that one town in particular has a much higher prevelance.</p>
+<p>In many of these conditions, it’s worth noting that one town in particular has a much higher prevelance. Unfortunately, with the vast number of towns and conditions there are so many it is difficult to accurately visualize. However, Hancock is extremely high for Sinusitus. <a href="https://en.wikipedia.org/wiki/List_of_Massachusetts_locations_by_per_capita_income">This could be notable as Hancock ranked as the 287th richest town in Mass out of 341, so it is less wealthy compares to others in our dataset.</a></p>
 </section>
 </section>
 <section id="cancer-eda" class="level2">
 <h2 class="anchored" data-anchor-id="cancer-eda">Cancer EDA</h2>
 <section id="cancer-by-race" class="level3">
 <h3 class="anchored" data-anchor-id="cancer-by-race">CANCER BY RACE</h3>
-<div id="cell-31" class="cell" data-execution_count="83">
+<div id="cell-33" class="cell" data-execution_count="83">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the columns ending with '_CONDITIONS'</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>condition_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> cancer.columns <span class="cf">if</span> col.endswith(<span class="st">'_CONDITIONS'</span>)]</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -728,7 +730,7 @@ background-size: cover;
 </section>
 <section id="cancer-by-ethnicity" class="level3">
 <h3 class="anchored" data-anchor-id="cancer-by-ethnicity">CANCER BY ETHNICITY</h3>
-<div id="cell-34" class="cell" data-execution_count="84">
+<div id="cell-36" class="cell" data-execution_count="84">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the columns ending with '_CONDITIONS'</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>condition_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> cancer.columns <span class="cf">if</span> col.endswith(<span class="st">'_CONDITIONS'</span>)]</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -760,14 +762,14 @@ background-size: cover;
 </section>
 <section id="cancer-prevalance-by-birthplace" class="level3">
 <h3 class="anchored" data-anchor-id="cancer-prevalance-by-birthplace">CANCER PREVALANCE BY BIRTHPLACE</h3>
-<div id="cell-36" class="cell" data-execution_count="85">
+<div id="cell-38" class="cell" data-execution_count="85">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>condition_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> cancer.columns <span class="cf">if</span> col.endswith(<span class="st">'_CONDITIONS'</span>)]</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>conditions_summed <span class="op">=</span> cancer.groupby(<span class="st">'birthplace'</span>)[condition_columns].<span class="bu">sum</span>().reset_index()</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>prevdatacanc <span class="op">=</span> pd.merge(conditions_summed, populations, on<span class="op">=</span><span class="st">"birthplace"</span>)</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> condition_column <span class="kw">in</span> condition_columns:</span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    prevdatacanc[<span class="ss">f'prevalence_</span><span class="sc">{</span>condition_column<span class="sc">}</span><span class="ss">'</span>] <span class="op">=</span> prevdatacanc[condition_column] <span class="op">/</span> prevdatacanc[<span class="st">'pop'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-37" class="cell" data-execution_count="86">
+<div id="cell-39" class="cell" data-execution_count="86">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> condition_column <span class="kw">in</span> condition_columns:</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter out birthplaces where prevalence is not zero</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    filtered_data <span class="op">=</span> prevdatacanc[prevdatacanc[<span class="ss">f'prevalence_</span><span class="sc">{</span>condition_column<span class="sc">}</span><span class="ss">'</span>] <span class="op">!=</span> <span class="dv">0</span>]</span>
@@ -831,14 +833,14 @@ background-size: cover;
 </div>
 </div>
 </div>
-<p>For some cancer types, very few places record incidents.</p>
+<p>For some cancer types, very few places record incidents. It is harder to draw conclusion for different conditions with this lack of data.</p>
 </section>
 </section>
 <section id="diabetes-eda" class="level2">
 <h2 class="anchored" data-anchor-id="diabetes-eda">Diabetes EDA</h2>
 <section id="diabetes-by-race" class="level3">
 <h3 class="anchored" data-anchor-id="diabetes-by-race">DIABETES BY RACE</h3>
-<div id="cell-41" class="cell" data-execution_count="87">
+<div id="cell-43" class="cell" data-execution_count="87">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the columns ending with '_CONDITIONS'</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>condition_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> diabetes.columns <span class="cf">if</span> col.endswith(<span class="st">'_CONDITIONS'</span>)]</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -869,7 +871,7 @@ background-size: cover;
 </section>
 <section id="diabetes-by-ethnicity" class="level3">
 <h3 class="anchored" data-anchor-id="diabetes-by-ethnicity">DIABETES BY ETHNICITY</h3>
-<div id="cell-43" class="cell" data-execution_count="88">
+<div id="cell-45" class="cell" data-execution_count="88">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the columns ending with '_CONDITIONS'</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>condition_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> diabetes.columns <span class="cf">if</span> col.endswith(<span class="st">'_CONDITIONS'</span>)]</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -898,17 +900,18 @@ background-size: cover;
 </div>
 </div>
 </div>
+<p>We don’t see significant race of ethnicity disparities for the different diabetes conditions.</p>
 </section>
 <section id="diabetes-prevalence-by-birthplace" class="level3">
 <h3 class="anchored" data-anchor-id="diabetes-prevalence-by-birthplace">DIABETES PREVALENCE BY BIRTHPLACE</h3>
-<div id="cell-45" class="cell" data-execution_count="89">
+<div id="cell-48" class="cell" data-execution_count="89">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>condition_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> diabetes.columns <span class="cf">if</span> col.endswith(<span class="st">'_CONDITIONS'</span>)]</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>conditions_summed <span class="op">=</span> diabetes.groupby(<span class="st">'birthplace'</span>)[condition_columns].<span class="bu">sum</span>().reset_index()</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>prevdatadiab <span class="op">=</span> pd.merge(conditions_summed, populations, on<span class="op">=</span><span class="st">"birthplace"</span>)</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> condition_column <span class="kw">in</span> condition_columns:</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    prevdatadiab[<span class="ss">f'prevalence_</span><span class="sc">{</span>condition_column<span class="sc">}</span><span class="ss">'</span>] <span class="op">=</span> prevdatadiab[condition_column] <span class="op">/</span> prevdatadiab[<span class="st">'pop'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-46" class="cell" data-execution_count="90">
+<div id="cell-49" class="cell" data-execution_count="90">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> condition_column <span class="kw">in</span> condition_columns:</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter out birthplaces where prevalence is not zero</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    filtered_data <span class="op">=</span> prevdatadiab[prevdatadiab[<span class="ss">f'prevalence_</span><span class="sc">{</span>condition_column<span class="sc">}</span><span class="ss">'</span>] <span class="op">!=</span> <span class="dv">0</span>]</span>
@@ -986,7 +989,7 @@ background-size: cover;
 <h2 class="anchored" data-anchor-id="cardiovascular-diseases-eda">Cardiovascular Diseases EDA</h2>
 <section id="cardiovascular-diseases-by-race" class="level3">
 <h3 class="anchored" data-anchor-id="cardiovascular-diseases-by-race">CARDIOVASCULAR DISEASES BY RACE</h3>
-<div id="cell-50" class="cell" data-execution_count="91">
+<div id="cell-53" class="cell" data-execution_count="91">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the columns ending with '_CONDITIONS'</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>condition_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> heart.columns <span class="cf">if</span> col.endswith(<span class="st">'_CONDITIONS'</span>)]</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1018,7 +1021,7 @@ background-size: cover;
 </section>
 <section id="cardiovascular-diseases-by-ethnicity" class="level3">
 <h3 class="anchored" data-anchor-id="cardiovascular-diseases-by-ethnicity">CARDIOVASCULAR DISEASES BY ETHNICITY</h3>
-<div id="cell-53" class="cell" data-execution_count="92">
+<div id="cell-56" class="cell" data-execution_count="92">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the columns ending with '_CONDITIONS'</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>condition_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> heart.columns <span class="cf">if</span> col.endswith(<span class="st">'_CONDITIONS'</span>)]</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1050,14 +1053,14 @@ background-size: cover;
 </section>
 <section id="cardiovascular-disease-prevalence-by-birthplace" class="level3">
 <h3 class="anchored" data-anchor-id="cardiovascular-disease-prevalence-by-birthplace">CARDIOVASCULAR DISEASE PREVALENCE BY BIRTHPLACE</h3>
-<div id="cell-55" class="cell" data-execution_count="93">
+<div id="cell-58" class="cell" data-execution_count="93">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>condition_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> heart.columns <span class="cf">if</span> col.endswith(<span class="st">'_CONDITIONS'</span>)]</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>conditions_summed <span class="op">=</span> heart.groupby(<span class="st">'birthplace'</span>)[condition_columns].<span class="bu">sum</span>().reset_index()</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>prevdataheart <span class="op">=</span> pd.merge(conditions_summed, populations, on<span class="op">=</span><span class="st">"birthplace"</span>)</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> condition_column <span class="kw">in</span> condition_columns:</span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    prevdataheart[<span class="ss">f'prevalence_</span><span class="sc">{</span>condition_column<span class="sc">}</span><span class="ss">'</span>] <span class="op">=</span> prevdataheart[condition_column] <span class="op">/</span> prevdataheart[<span class="st">'pop'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-56" class="cell" data-execution_count="94">
+<div id="cell-59" class="cell" data-execution_count="94">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> condition_column <span class="kw">in</span> condition_columns:</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter out birthplaces where prevalence is not zero</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    filtered_data <span class="op">=</span> prevdataheart[prevdataheart[<span class="ss">f'prevalence_</span><span class="sc">{</span>condition_column<span class="sc">}</span><span class="ss">'</span>] <span class="op">!=</span> <span class="dv">0</span>]</span>
@@ -1107,13 +1110,14 @@ background-size: cover;
 </div>
 </div>
 </div>
+<p>Charlemont and Russell seem to stand out with high levels of heart defects, <a href="https://en.wikipedia.org/wiki/List_of_Massachusetts_locations_by_per_capita_income">with a wealth rating of 306 and 280 out of 341 respectively.</a>.</p>
 </section>
 </section>
 <section id="pregnancy-complicationsn-eda" class="level2">
 <h2 class="anchored" data-anchor-id="pregnancy-complicationsn-eda">Pregnancy Complicationsn EDA</h2>
 <section id="pregnancy-complications-by-race" class="level3">
 <h3 class="anchored" data-anchor-id="pregnancy-complications-by-race">PREGNANCY COMPLICATIONS BY RACE</h3>
-<div id="cell-59" class="cell" data-execution_count="95">
+<div id="cell-63" class="cell" data-execution_count="95">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the columns ending with '_CONDITIONS'</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>condition_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> pregnancy.columns <span class="cf">if</span> col.endswith(<span class="st">'_CONDITIONS'</span>)]</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1145,7 +1149,7 @@ background-size: cover;
 </section>
 <section id="pregnancy-complications-by-ethnicity" class="level3">
 <h3 class="anchored" data-anchor-id="pregnancy-complications-by-ethnicity">PREGNANCY COMPLICATIONS BY ETHNICITY</h3>
-<div id="cell-62" class="cell" data-execution_count="96">
+<div id="cell-66" class="cell" data-execution_count="96">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the columns ending with '_CONDITIONS'</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>condition_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> pregnancy.columns <span class="cf">if</span> col.endswith(<span class="st">'_CONDITIONS'</span>)]</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1178,14 +1182,14 @@ background-size: cover;
 </section>
 <section id="pregnancy-complications-by-birthplace" class="level3">
 <h3 class="anchored" data-anchor-id="pregnancy-complications-by-birthplace">PREGNANCY COMPLICATIONS BY BIRTHPLACE</h3>
-<div id="cell-65" class="cell" data-execution_count="97">
+<div id="cell-69" class="cell" data-execution_count="97">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>condition_columns <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> pregnancy.columns <span class="cf">if</span> col.endswith(<span class="st">'_CONDITIONS'</span>)]</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>conditions_summed <span class="op">=</span> pregnancy.groupby(<span class="st">'birthplace'</span>)[condition_columns].<span class="bu">sum</span>().reset_index()</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>prevdatapreg <span class="op">=</span> pd.merge(conditions_summed, populations, on<span class="op">=</span><span class="st">"birthplace"</span>)</span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> condition_column <span class="kw">in</span> condition_columns:</span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    prevdatapreg[<span class="ss">f'prevalence_</span><span class="sc">{</span>condition_column<span class="sc">}</span><span class="ss">'</span>] <span class="op">=</span> prevdatapreg[condition_column] <span class="op">/</span> prevdatapreg[<span class="st">'pop'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-66" class="cell" data-execution_count="98">
+<div id="cell-70" class="cell" data-execution_count="98">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> condition_column <span class="kw">in</span> condition_columns:</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter out birthplaces where prevalence is not zero</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    filtered_data <span class="op">=</span> prevdatapreg[prevdatapreg[<span class="ss">f'prevalence_</span><span class="sc">{</span>condition_column<span class="sc">}</span><span class="ss">'</span>] <span class="op">!=</span> <span class="dv">0</span>]</span>
